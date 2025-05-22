@@ -25,4 +25,52 @@ Text classification
 
 Duplicate question detection
 
+RAG combines two powerful ideas:
+
+Retrieval – Find relevant information from a knowledge base (e.g., your .txt files).
+
+Generation – Use a language model to answer questions using that information.
+
+🧱 Components of a Simple RAG Pipeline
+1. Document Store (Your .txt files)
+You give it a folder of documents.
+🔹 These contain the knowledge your bot will use.
+
+2. Embedding Model (e.g., SentenceTransformer)
+This converts each document into a vector (a list of numbers that represent meaning).
+🔹 It allows the computer to compare meaning, not just words.
+
+3. FAISS Index
+This is a fast tool to search for similar documents based on a question’s embedding.
+
+4. Retriever Function
+Given a user query, it:
+
+Embeds the query.
+
+Finds top k similar documents from FAISS.
+
+5. Generative Model (e.g., PaLM via google.generativeai)
+It takes:
+
+The retrieved context, and
+
+The user question,
+And generates an answer using both.
+
+🧠 How It Works (Step-by-step)
+📂 Load .txt files → break into readable text chunks.
+
+🔢 Embed all chunks using SentenceTransformer.
+
+📚 Store embeddings in FAISS index.
+
+🤔 User asks a question → embed the question.
+
+🔍 Retrieve top k matching documents.
+
+🧠 Feed these docs + question into a language model (PaLM) → get answer.
+
+💬 Show the answer to the user.
+
 
